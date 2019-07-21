@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
 import 'package:stretcher/src/stores/selector_store.dart';
 
 class DateSelector extends StatefulWidget {
@@ -19,16 +18,17 @@ class DateSelectorState extends State<DateSelector> {
               color: Colors.black,
             ),
         padding: const EdgeInsets.all(16.0),
-        itemCount: widget.selectorStore.dateWeekSet.length,
+        itemCount: widget.selectorStore.dateWeekMap.keys.length,
         itemBuilder: _buildDateRow);
   }
 
   Widget _buildDateRow(BuildContext context, int index) {
-    bool completed = true;
+    String currentWeek = widget.selectorStore.dateWeekMap.keys.elementAt(index);
+    bool completed = widget.selectorStore.dateWeekMap[currentWeek];
 
     return ListTile(
       title: Text(
-        widget.selectorStore.dateWeekSet.elementAt(index),
+        currentWeek,
         style: widget.selectorStore.biggerFont,
       ),
       trailing: Icon(
@@ -38,7 +38,10 @@ class DateSelectorState extends State<DateSelector> {
       onTap: () {
         setState(() {
           if (completed) {
-          } else {}
+            widget.selectorStore.dateWeekMap[currentWeek] = false;
+          } else {
+            widget.selectorStore.dateWeekMap[currentWeek] = true;
+          }
         });
       },
     );
