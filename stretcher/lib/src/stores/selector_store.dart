@@ -5,8 +5,8 @@ class SelectorStore {
    ****** Fields ********
    ***********************/
 
-  /// Store all the weeks and an if completed value
-  Map<String, bool> dateWeekMap = {};
+  /// Store all the weeks
+  List<String> dateWeekList = [];
 
   /// Store actual object content
   Map<String, Object> workoutMap = {};
@@ -24,8 +24,8 @@ class SelectorStore {
   /// Initialize the 14 weeks of data
   void _initializeDates() {
     for (int i = 1; i <= 14; i++) {
-      String keyValue = 'Week ' + i.toString();
-      dateWeekMap[keyValue] = false;
+      String weekValue = 'Week ' + i.toString();
+      dateWeekList.add(weekValue);
     }
   }
 

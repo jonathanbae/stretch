@@ -18,13 +18,12 @@ class DateSelectorState extends State<DateSelector> {
               color: Colors.black,
             ),
         padding: const EdgeInsets.all(16.0),
-        itemCount: widget.selectorStore.dateWeekMap.keys.length,
+        itemCount: widget.selectorStore.dateWeekList.length,
         itemBuilder: _buildDateRow);
   }
 
   Widget _buildDateRow(BuildContext context, int index) {
-    String currentWeek = widget.selectorStore.dateWeekMap.keys.elementAt(index);
-    bool completed = widget.selectorStore.dateWeekMap[currentWeek];
+    String currentWeek = widget.selectorStore.dateWeekList.elementAt(index);
 
     return ListTile(
       title: Text(
@@ -32,17 +31,11 @@ class DateSelectorState extends State<DateSelector> {
         style: widget.selectorStore.biggerFont,
       ),
       trailing: Icon(
-        completed ? Icons.check_box : Icons.check_box_outline_blank,
-        color: completed ? Colors.lightGreenAccent : null,
+          Icons.keyboard_arrow_right
       ),
       onTap: () {
-        setState(() {
-          if (completed) {
-            widget.selectorStore.dateWeekMap[currentWeek] = false;
-          } else {
-            widget.selectorStore.dateWeekMap[currentWeek] = true;
-          }
-        });
+        //TODO when the row is clicked on, go to day view
+        setState(() {});
       },
     );
   }
