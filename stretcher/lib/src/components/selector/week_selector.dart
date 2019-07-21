@@ -34,7 +34,6 @@ class WeekSelectorState extends State<WeekSelector> {
           Icons.keyboard_arrow_right
       ),
       onTap: () {
-        //TODO when the row is clicked on, go to day view
         setState(() {
           widget.selectorStore.selectWeek(currentWeek);
         });
