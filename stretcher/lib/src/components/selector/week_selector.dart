@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:stretcher/src/stores/selector_store.dart';
 
-class DateSelector extends StatefulWidget {
+class WeekSelector extends StatefulWidget {
   final SelectorStore selectorStore;
 
-  DateSelector(this.selectorStore);
+  WeekSelector(this.selectorStore);
 
   @override
-  DateSelectorState createState() => DateSelectorState();
+  WeekSelectorState createState() => WeekSelectorState();
 }
 
-class DateSelectorState extends State<DateSelector> {
+class WeekSelectorState extends State<WeekSelector> {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
@@ -18,12 +18,12 @@ class DateSelectorState extends State<DateSelector> {
               color: Colors.black,
             ),
         padding: const EdgeInsets.all(16.0),
-        itemCount: widget.selectorStore.dateWeekList.length,
+        itemCount: widget.selectorStore.dateWeekMap.keys.length,
         itemBuilder: _buildDateRow);
   }
 
   Widget _buildDateRow(BuildContext context, int index) {
-    String currentWeek = widget.selectorStore.dateWeekList.elementAt(index);
+    String currentWeek = widget.selectorStore.dateWeekMap.keys.elementAt(index);
 
     return ListTile(
       title: Text(
@@ -35,7 +35,9 @@ class DateSelectorState extends State<DateSelector> {
       ),
       onTap: () {
         //TODO when the row is clicked on, go to day view
-        setState(() {});
+        setState(() {
+          widget.selectorStore.selectWeek(currentWeek);
+        });
       },
     );
   }

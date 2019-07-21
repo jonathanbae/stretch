@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:stretcher/src/models/workout_object.dart';
+
+enum CurrentView {
+  week,
+  day,
+  content,
+}
 
 class SelectorStore {
   /***********************
    ****** Fields ********
    ***********************/
-
+  /// View to be shown on home
+  CurrentView currentView = CurrentView.week;
+  String currentWeek;
   /// Store all the weeks
-  List<String> dateWeekList = [];
+  Map<String, WorkoutObject> dateWeekMap = {};
 
   /// Store actual object content
   Map<String, Object> workoutMap = {};
 
+  ///big font style
   TextStyle _biggerFont = const TextStyle(fontSize: 18.0);
 
   SelectorStore() {
@@ -21,12 +31,18 @@ class SelectorStore {
    ****** Methods ********
    ***********************/
 
-  /// Initialize the 14 weeks of data
+  /// Initialize all of the days present
   void _initializeDates() {
+    /// Initialize the 14 weeks of data
     for (int i = 1; i <= 14; i++) {
-      String weekValue = 'Week ' + i.toString();
-      dateWeekList.add(weekValue);
+      String weekId = 'Week ' + i.toString();
+      dateWeekMap[weekId] = new WorkoutObject(weekId);
     }
+  }
+
+  void selectWeek(String weekId) {
+    currentView = CurrentView.day;
+    currentWeek = weekId;
   }
 
   /***********************
