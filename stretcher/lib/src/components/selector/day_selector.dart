@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stretcher/src/models/workout_object.dart';
+import 'package:stretcher/src/static_files/static_styles.dart';
 
 class DaySelector extends StatefulWidget {
   final WorkoutObject workoutObject;
@@ -12,6 +13,15 @@ class DaySelector extends StatefulWidget {
 class DaySelectorState extends State<DaySelector> {
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.workoutObject.weekId),
+      ),
+      body: _buildDayList(),
+    );
+  }
+
+  Widget _buildDayList(){
     return ListView.separated(
         separatorBuilder: (context, index) => Divider(
               color: Colors.black,
@@ -22,19 +32,14 @@ class DaySelectorState extends State<DaySelector> {
   }
 
   Widget _buildDateRow(BuildContext context, int index) {
-
     return ListTile(
       title: Text(
         widget.workoutObject.daysOfWeek[index],
-//        style: widget.selectorStore.biggerFont,
+        style: StretcherStyles().biggerFont,
       ),
       trailing: Icon(
           Icons.keyboard_arrow_right
       ),
-      onTap: () {
-        setState(() {
-        });
-      },
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stretcher/src/static_files/static_styles.dart';
 import 'package:stretcher/src/stores/selector_store.dart';
 
 class WeekSelector extends StatefulWidget {
@@ -13,6 +14,15 @@ class WeekSelector extends StatefulWidget {
 class WeekSelectorState extends State<WeekSelector> {
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Stretcher'),
+      ),
+      body: _buildDateList(),
+    );
+  }
+
+  Widget _buildDateList() {
     return ListView.separated(
         separatorBuilder: (context, index) => Divider(
               color: Colors.black,
@@ -28,15 +38,12 @@ class WeekSelectorState extends State<WeekSelector> {
     return ListTile(
       title: Text(
         currentWeek,
-        style: widget.selectorStore.biggerFont,
+        style: StretcherStyles().biggerFont,
       ),
-      trailing: Icon(
-          Icons.keyboard_arrow_right
-      ),
+      trailing: Icon(Icons.keyboard_arrow_right),
       onTap: () {
-        setState(() {
-          widget.selectorStore.selectWeek(currentWeek);
-        });
+        widget.selectorStore.selectWeek(currentWeek);
+        Navigator.pushNamed(context, '/day');
       },
     );
   }

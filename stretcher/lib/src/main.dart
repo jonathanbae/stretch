@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:stretcher/src/components/selector/day_selector.dart';
+import 'package:stretcher/src/components/selector/week_selector.dart';
 
 import 'package:stretcher/src/stores/selector_store.dart';
-import 'package:stretcher/src/components/selector/workout_selector.dart';
 
 void main() {
   SelectorStore selectorStore = new SelectorStore();
@@ -18,19 +19,12 @@ class StretcherApp extends StatelessWidget {
     return MaterialApp(
       title: 'Stretch',
       theme: ThemeData(
-        // Add the 3 lines from here...
         primaryColor: Colors.teal,
-      ), // ... to here.
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Startup Name Generator'),
-          actions: <Widget>[
-            // Add 3 lines from here...
-//        IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
-          ], // ... to here.
-        ),
-        body: WorkoutSelector(_selectorStore),
       ),
+      routes: {
+        '/': (context) => WeekSelector(_selectorStore),
+        '/day': (context) => DaySelector(_selectorStore.dateWeekMap[_selectorStore.currentWeek])
+      }
     );
   }
 }

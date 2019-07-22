@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:stretcher/src/models/workout_object.dart';
 
 enum CurrentView {
@@ -20,8 +19,6 @@ class SelectorStore {
   /// Store actual object content
   Map<String, Object> workoutMap = {};
 
-  ///big font style
-  TextStyle _biggerFont = const TextStyle(fontSize: 18.0);
 
   SelectorStore() {
     _initializeDates();
@@ -48,6 +45,4 @@ class SelectorStore {
   /***********************
    ****** Getters ********
    ***********************/
-  ///big Font Style
-  TextStyle get biggerFont => _biggerFont;
 }
