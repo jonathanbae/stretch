@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:stretcher/src/models/workout_week_object.dart';
 import 'package:stretcher/src/static_files/static_styles.dart';
+import 'package:stretcher/src/stores/selector_store.dart';
 
 class DaySelector extends StatefulWidget {
   final WorkoutWeekObject workoutObject;
+  final SelectorStore _selectorStore;
 
-  DaySelector(this.workoutObject);
+  DaySelector(this.workoutObject, this._selectorStore);
 
   @override
   DaySelectorState createState() => DaySelectorState();
@@ -42,7 +44,8 @@ class DaySelectorState extends State<DaySelector> {
       ),
       trailing: Icon(Icons.keyboard_arrow_right),
       onTap: () {
-        print(widget.workoutObject.workoutsOnDays[currentDay]);
+        widget._selectorStore.selectDayOfWeek(currentDay);
+        Navigator.pushNamed(context, '/workout');
       },
     );
   }

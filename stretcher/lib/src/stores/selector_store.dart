@@ -8,20 +8,14 @@ import 'package:stretcher/src/static_files/day_json.dart';
 // Object imports
 import 'package:stretcher/src/models/workout_week_object.dart';
 
-enum CurrentView {
-  week,
-  day,
-  content,
-}
-
 class SelectorStore {
   /***********************
    ****** Fields ********
    ***********************/
 
   /// View to be shown on home
-  CurrentView currentView = CurrentView.week;
   String currentWeek;
+  String currentDay;
 
   /// Store all the weeks
   Map<String, WorkoutWeekObject> dateWeekMap = {};
@@ -52,6 +46,25 @@ class SelectorStore {
     //Monday
     List<dynamic> mondayDecode = json.decode(monday);
     _createDayData(mondayDecode, 'Monday');
+    //Monday
+    List<dynamic> tuesdayDecode = json.decode(tuesday);
+    _createDayData(tuesdayDecode, 'Tuesday');
+    //Monday
+    List<dynamic> wednesdayDecode = json.decode(wednesday);
+    _createDayData(wednesdayDecode, 'Wednesday');
+    //Monday
+    List<dynamic> thursdayDecode = json.decode(thursday);
+    _createDayData(thursdayDecode, 'Thursday');
+    //Monday
+    List<dynamic> fridayDecode = json.decode(friday);
+    _createDayData(fridayDecode, 'Friday');
+    //Monday
+    List<dynamic> saturdayDecode = json.decode(saturday);
+    _createDayData(saturdayDecode, 'Saturday');
+    //Monday
+    List<dynamic> sundayDecode = json.decode(sunday);
+    _createDayData(sundayDecode, 'Sunday');
+
   }
 
   _createDayData(List<dynamic> decodedWorkouts, String dayOfWeek) {
@@ -72,11 +85,20 @@ class SelectorStore {
   }
 
   void selectWeek(String weekId) {
-    currentView = CurrentView.day;
     currentWeek = weekId;
+  }
+
+  /// Get the current week object
+  WorkoutWeekObject selectedWorkoutWeekObject(String currentWeek) {
+    return dateWeekMap[currentWeek];
+  }
+
+  void selectDayOfWeek(String dayId) {
+    currentDay = dayId;
   }
 
 /***********************
  ****** Getters ********
  ***********************/
+
 }
