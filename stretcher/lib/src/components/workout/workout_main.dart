@@ -74,7 +74,7 @@ class WorkoutViewState extends State<WorkoutView> with TickerProviderStateMixin 
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         new Container(
-          child: RaisedButton(
+          child: FloatingActionButton(
             child: AnimatedBuilder(
               animation: controller,
               builder: (BuildContext context, Widget child) {
