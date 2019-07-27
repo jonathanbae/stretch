@@ -41,32 +41,40 @@ class WorkoutViewState extends State<WorkoutView> with TickerProviderStateMixin 
       ),
       body: Column(
         children: <Widget>[
-          new Expanded(child: _buildTimer()),
-          new Expanded(child: _buildTimerStartStop()),
-          new Expanded(child: _buildDayList()),
+          _buildTimer(),
+          _buildTimerStartStop(),
+          new Expanded(
+            child: _buildDayList(),
+          ),
         ],
       ),
     );
   }
 
   Widget _buildTimer() {
-    return AnimatedBuilder(
-        animation: controller,
-        builder: (BuildContext context, Widget child) {
-          return Text(
-            timerString,
-            style: StretcherStyles().biggerFont,
-          );
-        });
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        new Container(
+          child: AnimatedBuilder(
+              animation: controller,
+              builder: (BuildContext context, Widget child) {
+                return Text(
+                  timerString,
+                  style: StretcherStyles().timerFont,
+                );
+              }),
+        ),
+      ],
+    );
   }
 
   Widget _buildTimerStartStop() {
-    return Container(
-      margin: EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          FloatingActionButton(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        new Container(
+          child: RaisedButton(
             child: AnimatedBuilder(
               animation: controller,
               builder: (BuildContext context, Widget child) {
@@ -80,9 +88,9 @@ class WorkoutViewState extends State<WorkoutView> with TickerProviderStateMixin 
                 controller.reverse(from: controller.value == 0.0 ? 1.0 : controller.value);
               }
             },
-          )
-        ],
-      ),
+          ),
+        ),
+      ],
     );
   }
 
