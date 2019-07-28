@@ -72,7 +72,7 @@ class WorkoutTimerState extends State<WorkoutTimer> with TickerProviderStateMixi
                 controller.stop();
 //                setIconForRun(forceButtonToggle: true);
               } else {
-                controller.reverse(from: controller.vz   ? 1.0 : controller.value);
+                controller.reverse(from: controller.value == 0.0 ? 1.0 : controller.value);
               }
             },
           ),
