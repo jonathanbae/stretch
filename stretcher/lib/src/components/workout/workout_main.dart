@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:stretcher/src/components/workout/workout_timer.dart';
+import 'package:stretcher/src/models/workout_day_object.dart';
 import 'package:stretcher/src/models/workout_stretch_object.dart';
 import 'package:stretcher/src/static_files/static_styles.dart';
 import 'package:stretcher/src/stores/selector_store.dart';
 
 class WorkoutView extends StatefulWidget {
-  final List<WorkoutStretchObject> workoutOfDay;
+  final WorkoutDayObject workoutOfDay;
   final SelectorStore selectorStore;
 
   WorkoutView(this.workoutOfDay, this.selectorStore);
@@ -23,7 +24,7 @@ class WorkoutViewState extends State<WorkoutView> {
       ),
       body: Column(
         children: <Widget>[
-          WorkoutTimer(),
+          WorkoutTimer(widget.workoutOfDay.getWorkoutsDurations()),
           new Expanded(
             child: _buildDayList(),
           ),
@@ -38,12 +39,12 @@ class WorkoutViewState extends State<WorkoutView> {
               color: Colors.black,
             ),
         padding: const EdgeInsets.all(16.0),
-        itemCount: widget.workoutOfDay.length,
+        itemCount: widget.workoutOfDay.workoutsOnDay.length,
         itemBuilder: _buildDateRow);
   }
 
   Widget _buildDateRow(BuildContext context, int index) {
-    WorkoutStretchObject currentWorkout = widget.workoutOfDay.elementAt(index);
+    WorkoutStretchObject currentWorkout = widget.workoutOfDay.workoutsOnDay.elementAt(index);
 
     return ListTile(
       title: Text(

@@ -32,7 +32,6 @@ class StretcherApp extends StatelessWidget {
 
   Widget _generateWorkoutView() {
     WorkoutWeekObject workoutWeek = _selectorStore.selectedWorkoutWeekObject(_selectorStore.currentWeek);
-    return WorkoutView(workoutWeek.workoutsOnDays[_selectorStore.currentDay].workoutsOnDay,
-        _selectorStore);
+    return WorkoutView(workoutWeek.workoutsOnDays[_selectorStore.currentDay], _selectorStore);
   }
 }

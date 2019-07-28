@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:stretcher/src/static_files/static_styles.dart';
 
 class WorkoutTimer extends StatefulWidget {
-  WorkoutTimer();
+  WorkoutTimer(this.workoutDuration);
+
+  final Duration workoutDuration;
 
   @override
   WorkoutTimerState createState() => WorkoutTimerState();
@@ -10,7 +12,6 @@ class WorkoutTimer extends StatefulWidget {
 
 class WorkoutTimerState extends State<WorkoutTimer> with TickerProviderStateMixin {
   AnimationController controller;
-  Widget playIcon;
 
   String get timerString {
     Duration duration = controller.duration * controller.value;
@@ -22,7 +23,7 @@ class WorkoutTimerState extends State<WorkoutTimer> with TickerProviderStateMixi
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 10),
+      duration: widget.workoutDuration,
       value: 1,
     );
   }
@@ -38,9 +39,13 @@ class WorkoutTimerState extends State<WorkoutTimer> with TickerProviderStateMixi
   }
 
   Widget _buildTimer() {
-    return Row(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
+        Text(
+          "Count Down",
+          style: StretcherStyles().workoutFont,
+        ),
         new Container(
           child: AnimatedBuilder(
               animation: controller,
@@ -56,7 +61,7 @@ class WorkoutTimerState extends State<WorkoutTimer> with TickerProviderStateMixi
   }
 
   Widget _buildTimerStartStop() {
-    return Row(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         new Container(
@@ -70,7 +75,6 @@ class WorkoutTimerState extends State<WorkoutTimer> with TickerProviderStateMixi
             onPressed: () {
               if (controller.isAnimating) {
                 controller.stop();
-//                setIconForRun(forceButtonToggle: true);
               } else {
                 controller.reverse(from: controller.value == 0.0 ? 1.0 : controller.value);
               }
@@ -78,6 +82,7 @@ class WorkoutTimerState extends State<WorkoutTimer> with TickerProviderStateMixi
           ),
         ),
       ],
+      //TODO build a reset button
     );
   }
 }
