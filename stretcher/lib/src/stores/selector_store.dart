@@ -75,6 +75,10 @@ class SelectorStore {
       WorkoutStretchObject tempStretch = new WorkoutStretchObject.fromJson(decodedRow);
       //If start of new week, create new object
       if (decodedRow['Week'] != '') {
+        // generate time map before object is reset
+        if(tempDayWorkout != null) tempDayWorkout.generateTotalTime();
+
+        // set to a new week
         tempDayWorkout = new WorkoutDayObject(dayOfWeek);
         //Add to map of workouts if the key exists
         String weekKey = 'Week ' + decodedRow['Week'];

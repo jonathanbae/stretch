@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stretcher/src/static_files/static_styles.dart';
+import 'package:flutter/services.dart';
 
 class WorkoutTimer extends StatefulWidget {
   WorkoutTimer(this.workoutDuration, this.switchWorkoutMultiplier, this.totalWorkoutTime);
@@ -38,7 +39,7 @@ class WorkoutTimerState extends State<WorkoutTimer> with TickerProviderStateMixi
 
   _switchToNextWorkout(){
     //play the sound to switch
-
+    SystemSound.play(SystemSoundType.click);
     // iterate to the next value in list
     switchTimesIteratorCount++;
   }
