@@ -24,7 +24,8 @@ class WorkoutViewState extends State<WorkoutView> {
       ),
       body: Column(
         children: <Widget>[
-          WorkoutTimer(widget.workoutOfDay.getWorkoutsDurations()),
+          WorkoutTimer(new Duration(seconds: (widget.workoutOfDay.totalWorkoutTime * 60).round()),
+              widget.workoutOfDay.switchWorkoutMultiplier, widget.workoutOfDay.totalWorkoutTime),
           new Expanded(
             child: _buildDayList(),
           ),

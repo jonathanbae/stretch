@@ -3,21 +3,22 @@ import 'package:stretcher/src/models/workout_stretch_object.dart';
 class WorkoutDayObject {
   final String dayOfWeek;
   List<WorkoutStretchObject> workoutsOnDay = [];
+  double totalWorkoutTime = 0;
+  int countOfStretches = 0;
+
+  /// key: list of doubles from 0.0 to 1.0 used in the animation controller for the workouts
+  /// value: the string of the stretch used
+  Map<double, String> switchWorkoutMultiplier = {};
 
   WorkoutDayObject(this.dayOfWeek);
 
   addWorkoutToDay(WorkoutStretchObject workoutStretchObject) {
     workoutsOnDay.add(workoutStretchObject);
-  }
-
-  ///Return a duration in seconds of the total workout. Add 10 seconds per stretch to transition
-  Duration getWorkoutsDurations() {
-    double totalDurationMultiplier = 0.0;
-    int countOfStretches = 0;
-    for (WorkoutStretchObject workout in workoutsOnDay) {
-      totalDurationMultiplier += double.parse(workout.time);
-      countOfStretches++;
+    double temp = double.tryParse(workoutStretchObject.time);
+    if (temp != null) {
+      totalWorkoutTime += temp;
     }
-    return new Duration(seconds: (totalDurationMultiplier * 60).round() + (countOfStretches * 10));
+    countOfStretches++;
+    switchWorkoutMultiplier.putIfAbsent(totalWorkoutTime, () => workoutStretchObject.exercise);
   }
 }
